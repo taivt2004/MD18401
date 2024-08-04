@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Thêm sản phẩm</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      max-width: 700px;
+      width: 100%;
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    div {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    input[type="text"], input[type="number"], select {
+      background-color: #fafafa;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="text"]:focus, input[type="number"]:focus, select:focus {
+      background-color: #eef;
+      border-color: #007bff;
+    }
+
+    .field-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .field-container > div {
+      flex: 1;
+      min-width: 45%;
+    }
+
+    .button-group {
+      text-align: center;
+    }
+
+    .button-group button {
+      width: auto;
+      margin: 5px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-group button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+  <script>
+    function addField(containerId, fieldName, fieldLabel) {
+      const container = document.getElementById(containerId);
+      const newField = document.createElement('div');
+      newField.innerHTML = `
+        <label for="${fieldName}">${fieldLabel}:</label>
+        <input type="text" name="${fieldName}" required>
+      `;
+      container.appendChild(newField);
+    }
+  </script>
+</head>
+<body>
+  <form action="/add-product" method="POST">
+    <h1>Thêm sản phẩm mới</h1>
+    <div>
+      <label for="name">Tên:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+      <label for="price">Giá:</label>
+      <input type="number" id="price" name="price" required>
+    </div>
+    <div>
+      <label for="title">Tiêu đề cho sản phẩm:</label>
+      <input type="text" id="title" name="title" required>
+    </div>
+    <div>
+      <label for="image">Ảnh mô tả sản phẩm:</label>
+      <input type="text" id="image" name="image" required>
+    </div>
+    <div>
+      <label for="category">Loại:</label>
+      <select id="category" name="category" required>
+        {{#each listCate}}
+          <option value="{{this._id}}">{{this.name}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div>
+      <label for="brand">Hãng:</label>
+      <select id="brand" name="brand" required>
+        {{#each listBrand}}
+          <option value="{{this._id}}">{{this.name}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="field-container">
+      <h2>Chi tiết sản phẩm</h2>
+      <div>
+        <label for="man_hinh">Màn hình:</label>
+        <input type="text" id="man_hinh" name="man_hinh" required>
+      </div>
+      <div>
+        <label for="he_dieu_hanh">Hệ điều hành:</label>
+        <input type="text" id="he_dieu_hanh" name="he_dieu_hanh" required>
+      </div>
+    </div>
+    <div class="field-container">
+      <div>
+        <label for="chip">Chip:</label>
+        <input type="text" id="chip" name="chip" required>
+      </div>
+      <div>
+        <label for="pin">Pin:</label>
+        <input type="text" id="pin" name="pin" required>
+      </div>
+    </div>
+    <div class="field-container">
+      <div>
+        <label for="hang">Hãng:</label>
+        <input type="text" id="hang" name="hang" required>
+      </div>
+      <div>
+        <label for="camera_truoc">Camera trước:</label>
+        <input type="text" id="camera_truoc" name="camera_truoc" required>
+      </div>
+    </div>
+    <div class="field-container">
+      <div>
+        <label for="camera_sau">Camera sau:</label>
+        <input type="text" id="camera_sau" name="camera_sau" required>
+      </div>
+      <div>
+        <label for="anh_chi_tiet_sp">Ảnh chi tiết sản phẩm:</label>
+        <input type="text" name="anh_chi_tiet_sp" required>
+      </div>
+    </div>
+    <div id="anh_chi_tiet_sp_container"></div>
+    <div class="button-group">
+      <button type="button" onclick="addField('anh_chi_tiet_sp_container', 'anh_chi_tiet_sp', 'Ảnh chi tiết sản phẩm')">Thêm ảnh chi tiết</button>
+    </div>
+    <div id="dung_luong_Gia_container" class="field-container">
+      <div>
+        <label for="ram">RAM:</label>
+        <input type="text" name="ram" required>
+      </div>
+      <div>
+        <label for="luu_tru">Lưu trữ:</label>
+        <input type="text" name="luu_tru" required>
+      </div>
+      <div>
+        <label for="gia">Giá:</label>
+        <input type="number" name="gia" required>
+      </div>
+    </div>
+    <div class="button-group">
+      <button type="button" onclick="addField('dung_luong_Gia_container', 'ram', 'RAM')">Thêm RAM</button>
+      <button type="button" onclick="addField('dung_luong_Gia_container', 'luu_tru', 'Lưu trữ')">Thêm Lưu trữ</button>
+      <button type="button" onclick="addField('dung_luong_Gia_container', 'gia', 'Giá')">Thêm Giá</button>
+    </div>
+    <div id="mau_sac_container" class="field-container">
+      <div>
+        <label for="mau_sac">Màu sắc:</label>
+        <input type="text" name="mau_sac" required>
+      </div>
+      <div>
+        <label for="ten_mau">Tên màu:</label>
+        <input type="text" name="ten_mau" required>
+      </div>
+      <div>
+        <label for="anh_mau">Ảnh màu:</label>
+        <input type="text" name="anh_mau" required>
+      </div>
+    </div>
+    <div class="button-group">
+      <button type="button" onclick="addField('mau_sac_container', 'mau_sac', 'Màu sắc')">Thêm Màu sắc</button>
+      <button type="button" onclick="addField('mau_sac_container', 'ten_mau', 'Tên màu')">Thêm Tên màu</button>
+      <button type="button" onclick="addField('mau_sac_container', 'anh_mau', 'Ảnh màu')">Thêm Ảnh màu</button>
+    </div>
+    <div class="button-group">
+      <button type="submit">Thêm sản phẩm</button>
+    </div>
+  </form>
+</body>
+</html>

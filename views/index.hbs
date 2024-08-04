@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/public/stylesheets/style.css">
+</head>
+<body>
+    <h1>{{title}}</h1>
+    <a href="/add">Thêm</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá</th>
+            <th>Loại</th>
+            <th>Hãng</th>
+            <th>Lưu trữ</th>
+            <th>Ảnh chi tiết sản phẩm</th>
+            <th>Màu sắc</th>
+            <th>Thao tác</th>
+        </tr>
+        {{#each list}}
+        <tr>
+            <td rowspan="{{chi_tiet_sp.dung_luong_Gia.length}}">{{_id}}</td>
+            <td rowspan="{{chi_tiet_sp.dung_luong_Gia.length}}">{{name}}</td>
+            <td rowspan="{{chi_tiet_sp.dung_luong_Gia.length}}">{{price}}</td>
+            <td rowspan="{{chi_tiet_sp.dung_luong_Gia.length}}">{{category.name}}</td>
+            <td rowspan="{{chi_tiet_sp.dung_luong_Gia.length}}">{{brand.name}}</td>
+            {{#each chi_tiet_sp.dung_luong_Gia}}
+            {{#if @first}}
+            <td>
+                RAM: {{this.ram}}<br>
+                Lưu trữ: {{this.luu_tru}}<br>
+                Giá: {{this.gia}}<br>
+                ID: {{this._id}}
+            </td>
+            <td rowspan="{{../chi_tiet_sp.dung_luong_Gia.length}}">
+                {{#each ../chi_tiet_sp.anh_chi_tiet_sp}}
+                <img src="{{this}}" alt="Product Image" style="width: 50px; height: 50px; margin: 5px;">
+                {{/each}}
+            </td>
+            <td rowspan="{{../chi_tiet_sp.dung_luong_Gia.length}}">
+                {{#each ../chi_tiet_sp.mau_sac}}
+                <div>
+                    <span style="background-color: {{this.ma}}; width: 20px; height: 20px; display: inline-block;"></span>
+                    {{this.ten}}
+                    <img src="{{this.anh}}" alt="Color Image" style="width: 50px; height: 50px; margin: 5px;">
+                </div>
+                {{/each}}
+            </td>
+            <td rowspan="{{../chi_tiet_sp.dung_luong_Gia.length}}">
+                <a href="/edit/{{_id}}">Sửa</a> | <a href="/delete/{{_id}}">Xóa</a>
+            </td>
+        </tr>
+        {{else}}
+        <tr>
+            <td>
+                RAM: {{this.ram}}<br>
+                Lưu trữ: {{this.luu_tru}}<br>
+                Giá: {{this.gia}}<br>
+                ID: {{this._id}}
+            </td>
+        </tr>
+        {{/if}}
+        {{/each}}
+        {{/each}}
+    </table>
+</body>
+</html>
