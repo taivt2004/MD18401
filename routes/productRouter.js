@@ -20,7 +20,7 @@ const checkToken = require('./checkToken');
 
 // Lấy thông tin sản phẩm
 // https://md18401-api.onrender.com/products/all
-router.get('/all', async (req, res) => {
+router.get('/all',checkToken, async (req, res) => {
   try {
     const products = await Product.find();
     res.status(200).json({ status: true, products });
