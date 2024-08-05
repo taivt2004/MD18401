@@ -21,7 +21,7 @@ const Category = require('../models/category');
 router.get('/all', async (req, res) => {
   try {
     const categories = await Category.find();
-    res.json({ status: true, categories });
+    res.status(200).json({ status: true, categories });
   } catch (error) {
     res.status(500).json({ status: false, message: 'Lỗi máy chủ', error });
   }

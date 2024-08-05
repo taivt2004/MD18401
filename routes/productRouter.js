@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/product');
+const checkToken = require('./checkToken');
 
 
 
@@ -18,11 +19,11 @@ const Product = require('../models/product');
  */
 
 // Lấy thông tin sản phẩm
-// http://192.168.176.225:3007/products/all
-router.get('/all', async (req, res) => {
+// https://md18401-api.onrender.com/products/all
+router.get('/all', checkToken, async (req, res) => {
   try {
     const products = await Product.find();
-    res.json({ status: true, products });
+    res.status(200).json({ status: true, products });
   } catch (error) {
     res.status(500).json({ status: false, message: 'Lỗi máy chủ', error });
   }
