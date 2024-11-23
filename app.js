@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect('mongodb://localhost:27017/thi', {
+mongoose.connect('mongodb+srv://vtt2004abc:H4wiRWIlgldAD76P@taivt.mtwazra.mongodb.net/', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
@@ -48,7 +48,7 @@ app.use('/categories', categoryRouter);
 app.use('/', indexRouter);
 app.use('/products', productsRouter);
 app.use('/user', userRouter);
-app.use('/giaothong', ThiRouter)
+//app.use('/giaothong', ThiRouter)
 app.use(function(req, res, next) {
   next(createError(404));
 });
