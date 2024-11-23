@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/product');
-const checkToken = require('./checkToken');
 
 
 
@@ -20,6 +19,7 @@ const checkToken = require('./checkToken');
 
 // Lấy thông tin sản phẩm
 // https://md18401-api.onrender.com/products/all
+
 router.get('/all', async (req, res) => {
   try {
     const products = await Product.find();

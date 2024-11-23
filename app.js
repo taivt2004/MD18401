@@ -12,12 +12,11 @@ require('./models/user');
 require('./models/ThiModel.js')
 
 const indexRouter = require('./routes/index');
-const brandRouter = require('./routes/brandRouter');
+const brandRouter = require('./routes/brandRouter.js');
 const categoryRouter = require('./routes/categoryRouter');
 const productsRouter = require('./routes/productRouter');
 const userRouter = require('./routes/userRouter');
-const monHocRouter = require('./routes/monHocRouter');
-const ThiRouter = require('./route_thi/ThiRouter.js')
+
 
 const app = express();
 
@@ -34,9 +33,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect('mongodb+srv://vtt2004abc:H4wiRWIlgldAD76P@taivt.mtwazra.mongodb.net/', {
-  // useNewUrlParser: true,
-  // useUnifiedTopology: true
+mongoose.connect('mongodb+srv://vtt2004abc:H4wiRWIlgldAD76P@taivt.mtwazra.mongodb.net/db_phonestore', {
+   useNewUrlParser: true,
+   useUnifiedTopology: true
 }).then(() => {
   console.log('Connected to MongoDB');
 }).catch(err => {

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Brand = require('../models/brand');
-const checkToken = require('./checkToken')
 
 
 /**
@@ -20,9 +19,20 @@ const checkToken = require('./checkToken')
 
 
 // GET all brands
-// router.get('/all', async (req, res) => {
+
+router.get('/all', async (req, res) => {
+  try {
+    const brands = await Brand.find();
+    res.status(200).json({ status: true, brands });
+  } catch (error) {
+    res.status(500).json({ status: false, message: 'Lỗi máy chủ', error });
+  }
+});
+
+
+// router.get('/allBrands', async (req, res) => {
 //   try {
-//     console.log('Đã kết nối tới router /brands/all');
+//     console.log('Đã kết nối tới router /brands/allBrands');
 //     const brands = await Brand.find();
 //     console.log('Dữ liệu lấy được:', brands); // Log dữ liệu để kiểm tra
 //     res.status(200).json({ status: true, brands });
@@ -31,19 +41,6 @@ const checkToken = require('./checkToken')
 //     res.status(500).json({ status: false, message: 'Lỗi máy chủ', error });
 //   }
 // });
-
-
-router.get('/allBrands', async (req, res) => {
-  try {
-    console.log('Đã kết nối tới router /brands/allBrands');
-    const brands = await Brand.find();
-    console.log('Dữ liệu lấy được:', brands); // Log dữ liệu để kiểm tra
-    res.status(200).json({ status: true, brands });
-  } catch (error) {
-    console.error('Lỗi khi lấy brands:', error);
-    res.status(500).json({ status: false, message: 'Lỗi máy chủ', error });
-  }
-});
 
 /**
  * @swagger
@@ -86,12 +83,13 @@ router.get('/allBrands', async (req, res) => {
  */
 
 
+
 // thêm hãng
 router.post('/add', async (req, res) => {
   try {
     const { name, description } = req.body;
-    const newBrand = new Brand({ name, description });
-    await newBrand.save();
+    const newBrand = { name, description };
+    await Brand.create(newBrand);
     res.json({ status: true, brand: newBrand });
   } catch (error) {
     res.status(500).json({ status: false, message: 'Lỗi máy chủ', error });
