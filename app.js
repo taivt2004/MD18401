@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 require('./models/product');
 require('./models/category');
-require('./models/brand');
+require('./models/brand.js');
 require('./models/user');
 require('./models/ThiModel.js')
 
@@ -35,8 +35,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 mongoose.connect('mongodb+srv://vtt2004abc:H4wiRWIlgldAD76P@taivt.mtwazra.mongodb.net/', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+  // useNewUrlParser: true,
+  // useUnifiedTopology: true
 }).then(() => {
   console.log('Connected to MongoDB');
 }).catch(err => {

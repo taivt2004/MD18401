@@ -20,15 +20,30 @@ const checkToken = require('./checkToken')
 
 
 // GET all brands
-router.get('/all', async (req, res) => {  
+// router.get('/all', async (req, res) => {
+//   try {
+//     console.log('Đã kết nối tới router /brands/all');
+//     const brands = await Brand.find();
+//     console.log('Dữ liệu lấy được:', brands); // Log dữ liệu để kiểm tra
+//     res.status(200).json({ status: true, brands });
+//   } catch (error) {
+//     console.error('Lỗi khi lấy brands:', error);
+//     res.status(500).json({ status: false, message: 'Lỗi máy chủ', error });
+//   }
+// });
+
+
+router.get('/allBrands', async (req, res) => {
   try {
+    console.log('Đã kết nối tới router /brands/allBrands');
     const brands = await Brand.find();
+    console.log('Dữ liệu lấy được:', brands); // Log dữ liệu để kiểm tra
     res.status(200).json({ status: true, brands });
   } catch (error) {
+    console.error('Lỗi khi lấy brands:', error);
     res.status(500).json({ status: false, message: 'Lỗi máy chủ', error });
   }
 });
-
 
 /**
  * @swagger
