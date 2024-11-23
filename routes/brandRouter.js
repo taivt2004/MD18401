@@ -20,7 +20,7 @@ const checkToken = require('./checkToken')
 
 
 // GET all brands
-router.get('/all',checkToken, async (req, res) => {  
+router.get('/all', async (req, res) => {  
   try {
     const brands = await Brand.find();
     res.status(200).json({ status: true, brands });

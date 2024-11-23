@@ -1,0 +1,3 @@
+useCallback: Ghi nhớ một hàm callback để tránh tái tạo lại không cần thiết.
+memo: Ghi nhớ kết quả render của một functional component, chỉ render lại khi props thay đổi.
+useRef: Tạo một tham chiếu không đổi, có thể lưu trữ giá trị qua các lần render mà không gây render lại.

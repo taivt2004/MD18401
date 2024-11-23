@@ -53,7 +53,7 @@ router.delete('/delete/:mssv', function(req, res, next) {
 // Lấy thông tin chi tiết của một sinh viên theo mssv
 router.get('/detail', function(req, res, next) {
   const { mssv } = req.query;
-
+    
   var student = students.find(s => s.mssv == mssv);
   res.json(student);
 });

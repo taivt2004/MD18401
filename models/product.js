@@ -33,4 +33,4 @@ const productSchema = new Schema({
   brand: { type: Schema.Types.ObjectId, ref: 'Brand' }, 
 });
 
-module.exports = mongoose.model('Product', productSchema);
+  

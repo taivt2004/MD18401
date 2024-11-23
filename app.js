@@ -1,34 +1,30 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose');
 
-var logger = require('morgan');
-var mongoose = require('mongoose')
-require('./models/product')
-require('./models/category')
-require('./models/brand')
-require('./models/user')
-// require('./models/modelBanhKeo')
-// require('./models/CateBanhKeo')
+require('./models/product');
+require('./models/category');
+require('./models/brand');
+require('./models/user');
+require('./models/ThiModel.js')
 
+const indexRouter = require('./routes/index');
+const brandRouter = require('./routes/brandRouter');
+const categoryRouter = require('./routes/categoryRouter');
+const productsRouter = require('./routes/productRouter');
+const userRouter = require('./routes/userRouter');
+const monHocRouter = require('./routes/monHocRouter');
+const ThiRouter = require('./route_thi/ThiRouter.js')
 
-//var cateRouter = require('./routes/cateBanhKeoRouter')
-// var brandsRouter = require('./routes/cateBanhKeoRouter')
-var index = require('./routes/index')
-var brandRouter = require('./routes/brandRouter')
-var categoryRouter = require('./routes/categoryRouter')
-var productsRouter = require('./routes/productRouter'); // Sử dụng router cho products
-var userRouter = require('./routes/userRouter')
-
-var app = express();
+const app = express();
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger-config.js');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
@@ -38,8 +34,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-mongoose.connect('mongodb+srv://vtt2004abc:H4wiRWIlgldAD76P@taivt.mtwazra.mongodb.net/db_phonestore', {
+mongoose.connect('mongodb://localhost:27017/thi', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
@@ -48,25 +43,19 @@ mongoose.connect('mongodb+srv://vtt2004abc:H4wiRWIlgldAD76P@taivt.mtwazra.mongod
   console.error('Could not connect to MongoDB', err);
 });
 
-//app.use('/sv', svRouter)
-app.use('/brands', brandRouter)
-app.use('/categories', categoryRouter)
-//app.use('/products', cateRouter )
-app.use('/', index);
-app.use('/products', productsRouter); // Sử dụng productsRouter cho /products
-app.use('/user', userRouter)
-
+app.use('/brands', brandRouter);
+app.use('/categories', categoryRouter);
+app.use('/', indexRouter);
+app.use('/products', productsRouter);
+app.use('/user', userRouter);
+app.use('/giaothong', ThiRouter)
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-
 app.use(function(err, req, res, next) {
-  
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
