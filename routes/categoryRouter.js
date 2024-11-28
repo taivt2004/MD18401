@@ -18,6 +18,7 @@ const Category = require('../models/category');
  *          description: Lỗi máy chủ 
  */
 // lay thong tin danh muc
+
 router.get('/all', async (req, res) => {
   try {
     const categories = await Category.find();
