@@ -1,5 +1,6 @@
-const db = require("../db");
-const { Schema } = require("mongoose");
+// models/product.js
+const db = require('../db');
+const { Schema } = require('mongoose');
 
 const storagePriceSchema = new Schema({
   ram: String,
@@ -36,11 +37,11 @@ const productSchema = new Schema({
   price: { type: Number, required: true },
   image: String,
   details: detailSchema,
-  category: { type: Schema.Types.ObjectId, ref: "Category" },
-  brand: { type: Schema.Types.ObjectId, ref: "Brand" }
+  category: { type: Schema.Types.ObjectId, ref: 'Category' },
+  brand: { type: Schema.Types.ObjectId, ref: 'Brand' }
 });
 
-// ⚡ KHÁC BIỆT: tạo model từ connection mới, tránh cache cũ
-const Product2025 = db.model("Product2025", productSchema, "products");
+// ⚡ Quan trọng: tạo model từ connection mới
+const Product = db.model('Product', productSchema);
 
-module.exports = Product2025;
+module.exports = Product;
