@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const brandSchema = new Schema({
-  name: { type: String,index: true, required: true },
+  name: { type: String, index: true, required: true },
   description: { type: String, default: "null" },
 });
 

@@ -1,262 +1,116 @@
 const express = require('express');
 const router = express.Router();
-const Product = require('../models/product');
-
-
+const productController = require('../controller/productController/product_controller');
 
 /**
  * @swagger
- *  /products/all:
- *    get:
- *      summary: Lấy thông tin tất cả sản phẩm
- *      tags: [Products]
- *      responses:
- *        200:
- *          description: Trả về danh sách sản phẩm 
- *        400:
- *          description: Lỗi
+ * tags:
+ *   name: Products
+ *   description: API quản lý sản phẩm
  */
-
-// Lấy thông tin sản phẩm
-// https://md18401-api.onrender.com/products/all
-
-router.get('/all', async (req, res) => {
-  try {
-    const products = await Product.find();
-    res.status(200).json({ status: true, products });
-  } catch (error) {
-    res.status(500).json({ status: false, message: 'Lỗi máy chủ', error });
-  }
-});
-
 
 /**
- * @swagger 
- *  /products/add:
- *    post:
- *      summary: Thêm sản phẩm mới vào danh sách sản phẩm
- *      tags: [Products]
- *      requestBody:
- *        required: true
- *        content: 
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                name:
- *                  type: string
- *                  description: Tên sản phẩm
- *                title:
- *                  type: string
- *                  description: Tiêu đề sản phẩm
- *                price:
- *                  type: number
- *                  description: Giá sản phẩm
- *                image:
- *                  type: string
- *                  description: URL ảnh của sản phẩm
- *                chi_tiet_sp:
- *                  type: object
- *                  properties:
- *                    man_hinh:
- *                      type: string
- *                      description: Màn hình của sản phẩm
- *                    anh_chi_tiet_sp:
- *                      type: array
- *                      items:
- *                        type: string
- *                      description: Danh sách URL ảnh chi tiết của sản phẩm
- *                    he_dieu_hanh:
- *                      type: string
- *                      description: Hệ điều hành của sản phẩm
- *                    dung_luong_Gia:
- *                      type: array
- *                      items:
- *                        type: object
- *                        properties:
- *                          ram:
- *                            type: string
- *                            description: Dung lượng RAM
- *                          luu_tru:
- *                            type: string
- *                            description: Dung lượng lưu trữ
- *                          gia:
- *                            type: number
- *                            description: Giá tương ứng với dung lượng
- *                      description: Danh sách dung lượng và giá
- *                    mau_sac:
- *                      type: array
- *                      items:
- *                        type: object
- *                        properties:
- *                          ma:
- *                            type: string
- *                            description: Mã màu
- *                          ten:
- *                            type: string
- *                            description: Tên màu
- *                          anh:
- *                            type: string
- *                            description: URL ảnh của màu
- *                      description: Danh sách màu sắc
- *                    chip:
- *                      type: string
- *                      description: Chip của sản phẩm
- *                    pin:
- *                      type: string
- *                      description: Pin của sản phẩm
- *                    hang:
- *                      type: string
- *                      description: Hãng của sản phẩm
- *                    camera:
- *                      type: array
- *                      items:
- *                        type: object
- *                        properties:
- *                          camera_truoc:
- *                            type: string
- *                            description: Camera trước
- *                          camera_sau:
- *                            type: string
- *                            description: Camera sau
- *                      description: Danh sách camera của sản phẩm
- *                category:
- *                  type: string
- *                  description: ID danh mục của sản phẩm
- *                brand:
- *                  type: string
- *                  description: ID hãng của sản phẩm
- *      responses:
- *        200:
- *          description: Thêm thành công
- *          content:
- *            application/json:
- *              schema:
- *                type: object
- *                properties:
- *                  status:
- *                    type: boolean
- *                  product:
- *                    type: object
- *                    properties:
- *                      _id:
- *                        type: string
- *                      name:
- *                        type: string
- *                      title:
- *                        type: string
- *                      price:
- *                        type: number
- *                      image:
- *                        type: string
- *                      chi_tiet_sp:
- *                        type: object
- *                        properties:
- *                          man_hinh:
- *                            type: string
- *                          anh_chi_tiet_sp:
- *                            type: array
- *                            items:
- *                              type: string
- *                          he_dieu_hanh:
- *                            type: string
- *                          dung_luong_Gia:
- *                            type: array
- *                            items:
- *                              type: object
- *                              properties:
- *                                ram:
- *                                  type: string
- *                                luu_tru:
- *                                  type: string
- *                                gia:
- *                                  type: number
- *                          mau_sac:
- *                            type: array
- *                            items:
- *                              type: object
- *                              properties:
- *                                ma:
- *                                  type: string
- *                                ten:
- *                                  type: string
- *                                anh:
- *                                  type: string
- *                          chip:
- *                            type: string
- *                          pin:
- *                            type: string
- *                          hang:
- *                            type: string
- *                          camera:
- *                            type: array
- *                            items:
- *                              type: object
- *                              properties:
- *                                camera_truoc:
- *                                  type: string
- *                                camera_sau:
- *                                  type: string
- *                      category:
- *                        type: string
- *                      brand:
- *                        type: string
- *        500:
- *          description: Lỗi máy chủ
+ * @swagger
+ * /products/all:
+ *   get:
+ *     summary: Lấy thông tin tất cả sản phẩm
+ *     tags: [Products]
+ *     responses:
+ *       200:
+ *         description: Trả về danh sách sản phẩm
+ *       500:
+ *         description: Lỗi máy chủ
  */
+router.get('/all', productController.getAllProducts);
 
+/**
+ * @swagger
+ * /products/add:
+ *   post:
+ *     summary: Thêm sản phẩm mới vào danh sách sản phẩm1
+ *     tags: [Products]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Product'
+ *     responses:
+ *       200:
+ *         description: Thêm thành công
+ *       500:
+ *         description: Lỗi máy chủ
+ */
+router.post('/add', productController.addProduct);
 
-// Tạo product mới
-// http://192.168.176.225:3007/products/add
-router.post('/add', async (req, res) => {
-  try {
-    const { name, title, price, image, chi_tiet_sp, category, brand } = req.body;
-    const newProduct = new Product({ name, title, price, image, chi_tiet_sp, category, brand });
-    await newProduct.save();
-    res.json({ status: true, product: newProduct });
-  } catch (error) {
-    res.status(500).json({ status: false, message: 'Lỗi máy chủ', error });
-  }
-});
+/**
+ * @swagger
+ * /products/byCategory/{categoryId}:
+ *   get:
+ *     summary: Lấy danh sách sản phẩm theo loại (có thể lọc thêm theo brandId)
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: categoryId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID danh mục sản phẩm
+ *       - in: query
+ *         name: brandId
+ *         schema:
+ *           type: string
+ *         description: ID hãng (nếu muốn lọc thêm)
+ *     responses:
+ *       200:
+ *         description: Trả về danh sách sản phẩm theo loại
+ *       500:
+ *         description: Lỗi máy chủ
+ */
+router.get('/byCategory/:categoryId', productController.getProductsByCategory);
 
-// Lấy thông tin sản phẩm theo id loại
-router.get('/byCategory/:categoryId', async (req, res) => {
-  const { categoryId } = req.params;
-  const { brandId } = req.query; // Lấy brandId từ query params nếu có
-  try {
-    let products;
-    if (brandId) {
-      products = await Product.find({ category: categoryId, brand: brandId });
-    } else {
-      products = await Product.find({ category: categoryId });
-    }
-    res.status(200).json({ status: true, products });
-  } catch (error) {
-    res.status(500).json({ status: false, message: 'Lỗi máy chủ', error });
-  }
-});
+/**
+ * @swagger
+ * /products/byBrand/{brandId}:
+ *   get:
+ *     summary: Lấy sản phẩm theo hãng
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: brandId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID hãng sản phẩm
+ *     responses:
+ *       200:
+ *         description: Trả về danh sách sản phẩm theo hãng
+ *       500:
+ *         description: Lỗi máy chủ
+ */
+router.get('/byBrand/:brandId', productController.getProductsByBrand);
 
-// Lấy sản phẩm theo id hãng
-router.get('/byBrand/:brandId', async (req, res) => {
-  try {
-    const products = await Product.find({ brand: req.params.brandId });
-    res.json({ status: true, products });
-  } catch (error) {
-    res.status(500).json({ status: false, message: 'Lỗi máy chủ', error });
-  }
-});
-
-// Lấy sản phẩm theo id
-router.get('/:id', async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id);
-    if (!product) {
-      return res.status(404).json({ status: false, message: 'Sản phẩm không tồn tại' });
-    }
-    res.json({ status: true, product });
-  } catch (error) {
-    res.status(500).json({ status: false, message: 'Lỗi máy chủ', error });
-  }
-});
+/**
+ * @swagger
+ * /products/{id}:
+ *   get:
+ *     summary: Lấy chi tiết sản phẩm theo ID
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID sản phẩm
+ *     responses:
+ *       200:
+ *         description: Thông tin chi tiết sản phẩm
+ *       404:
+ *         description: Sản phẩm không tồn tại
+ *       500:
+ *         description: Lỗi máy chủ
+ */
+router.get('/:id', productController.getProductById);
 
 module.exports = router;
