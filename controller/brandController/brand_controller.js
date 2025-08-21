@@ -22,7 +22,8 @@ exports.addBrand = async (req, res) => {
         await newBrand.save();
         res.status(201).json({ status: true, brand: newBrand });
     } catch (error) {
-        console.error("Error adding brand:", error.message);
+        console.log("Error adding brand:", error.message);
         res.status(500).json({ status: false, message: 'Lỗi máy chủ' });
+
     }
 }        
