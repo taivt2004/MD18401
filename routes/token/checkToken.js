@@ -1,5 +1,5 @@
 const JWT = require('jsonwebtoken')
-const config = require('../config')
+const config = require('../../config')
 
 const checkToken = function (req, res, next) {
     const token = req.header("Authorization").split(' ')[1];
