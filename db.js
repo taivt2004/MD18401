@@ -3,11 +3,12 @@ const mongoose = require('mongoose');
 const connection = mongoose.createConnection(
     'mongodb+srv://vtt2004abc:H4wiRWIlgldAD76P@taivt.mtwazra.mongodb.net/db_phonestore2025',
     {
-        serverSelectionTimeoutMS: 30000, // Tăng timeout lên 30 giây
+        serverSelectionTimeoutMS: 30000, // Timeout 30 giây
         heartbeatFrequencyMS: 10000, // Kiểm tra kết nối thường xuyên
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        bufferCommands: false // Tắt buffering để tránh timeout
+        bufferCommands: false, // Tắt buffering
+        socketTimeoutMS: 45000 // Tăng timeout socket
     }
 );
 
