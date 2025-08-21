@@ -6,3 +6,5 @@ const brandController = require('../../controller/brandController/brand_controll
 
 router.get('/all', brandController.getAllBrands);
 router.post('/add', brandController.addBrand);
+
+module.exports = router;

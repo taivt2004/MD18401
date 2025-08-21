@@ -5,7 +5,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
 const brandRouter = require('./routes/brandRouter/brandRouter.js');
 const categoryRouter = require('./routes/categoryRouter');
 const productsRouter = require('./routes/productRouter');
@@ -37,7 +36,6 @@ require('./models/user');
 // Routes
 app.use('/brands', brandRouter);
 app.use('/categories', categoryRouter);
-app.use('/', indexRouter);
 app.use('/products', productsRouter);
 app.use('/user', userRouter);
 

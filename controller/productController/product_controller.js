@@ -1,5 +1,5 @@
 const Product = require('../../models/product');
-const Variant = require('../../models/variant');
+const Variant = require('../../models/variants');
 
 // Lấy tất cả sản phẩm + populate variants
 exports.getAllProducts = async (req, res) => {
