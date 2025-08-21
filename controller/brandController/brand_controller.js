@@ -14,7 +14,9 @@ exports.addBrand = async (req, res) => {
     const { name, description } = req.body;
     console.log('Request body:', req.body); // Kiểm tra dữ liệu nhận được
     try {
+        console.log('Checking existing brand with name:', name);
         const existingBrand = await Brand.findOne({ name });
+        console.log('FindOne completed:', existingBrand);
         if (existingBrand) {
             return res.status(400).json({ status: false, message: 'Thương hiệu đã tồn tại' });
         }
