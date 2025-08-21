@@ -6,6 +6,5 @@ const cateSchema = new mongoose.Schema({
   description: { type: String, default: "null" },
 });
 
-const Category = connection.model('Categories', cateSchema); // Sử dụng connection từ db.js
-
+const Category = connection.model('Categories', cateSchema);
 module.exports = Category;
