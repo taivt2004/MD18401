@@ -8,7 +8,7 @@ const connection = require('./db.js');
 const brandRouter = require('./routes/brandRouter/brandRouter.js');
 const categoryRouter = require('./routes/cateRouter/categoryRouter.js');
 const productsRouter = require('./routes/productRouter');
-const userRouter = require('./routes/userRouter');
+const userRouter = require('./routes/authRouter/userRouter.js');
 
 const app = express();
 
