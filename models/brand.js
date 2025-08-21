@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const connection = require('../db.js'); // Import connection
 
-const brandSchema = new Schema({
+const brandSchema = new mongoose.Schema({
   name: { type: String, index: true, required: true },
   description: { type: String, default: "null" },
 });
 
-const Brand = mongoose.model('Brand', brandSchema);
+const Brand = connection.model('Brand', brandSchema); // Sử dụng connection từ db.js
 
 module.exports = Brand;
