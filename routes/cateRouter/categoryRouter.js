@@ -3,7 +3,7 @@ const router = express.Router();
 const categoryController = require('../../controller/cate_controller.js/cate_controller.js');
 
 router.use((req, res, next) => {
-    console.log('Route /brands hit:', req.method, req.url);
+    console.log('Route /cate hit:', req.method, req.url);
     next();
 });
 
