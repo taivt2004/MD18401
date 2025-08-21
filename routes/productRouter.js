@@ -27,7 +27,7 @@ router.get('/all', productController.getAllProducts);
  * @swagger
  * /products/add:
  *   post:
- *     summary: Thêm sản phẩm mới vào danh sách sản phẩm1
+ *     summary: Thêm sản phẩm mới vào danh sách sản phẩm
  *     tags: [Products]
  *     requestBody:
  *       required: true
