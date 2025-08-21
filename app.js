@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Import models để chắc chắn chúng được load
+
 require('./models/product');
 require('./models/category');
 require('./models/brand');
@@ -41,7 +41,7 @@ app.use('/', indexRouter);
 app.use('/products', productsRouter);
 app.use('/user', userRouter);
 
-// Error handling
+
 app.use(function (req, res, next) {
   next(createError(404));
 });
