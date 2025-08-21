@@ -89,6 +89,8 @@ const featuresSchema = new Schema({
   bluetooth: String            // "v5.2"
 }, { _id: false });
 
+
+
 // Schema chính chi tiết sản phẩm
 const detailSchema = new Schema({
   screen: screenSchema,
@@ -113,6 +115,7 @@ const productSchema = new Schema({
   price: { type: Number, required: true },
   image: String,
   details: detailSchema,
+  variants: [{ type: Schema.Types.ObjectId, ref: 'Variant' }],
   category: { type: Schema.Types.ObjectId, ref: 'Category' },
   brand: { type: Schema.Types.ObjectId, ref: 'Brand' }
 });
