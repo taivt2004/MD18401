@@ -12,7 +12,7 @@ exports.getAllBrands = async (req, res) => {
 
 exports.addBrand = async (req, res) => {
     const { name, description } = req.body;
-
+    console.log('Request body:', req.body); // Kiểm tra dữ liệu nhận được
     try {
         const existingBrand = await Brand.findOne({ name });
         if (existingBrand) {
@@ -22,8 +22,7 @@ exports.addBrand = async (req, res) => {
         await newBrand.save();
         res.status(201).json({ status: true, brand: newBrand });
     } catch (error) {
-        console.log("Error adding brand:", error.message);
+        console.error("Error adding brand:", error.stack); // Log đầy đủ stack trace
         res.status(500).json({ status: false, message: 'Lỗi máy chủ' });
-
     }
-}        
+};     
