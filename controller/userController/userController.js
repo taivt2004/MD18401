@@ -41,7 +41,7 @@ exports.login = async (req, res) => {
         if (isMatch) {
             const token = JWT.sign({ email: email }, config.SECRETKEY, { expiresIn: "30s" });
             const refreshToken = JWT.sign({ email: email }, config.SECRETKEY, { expiresIn: "1d" });
-
+            
             res.status(200).json({
                 status: true,
                 message: 'Đăng nhập thành công',

@@ -84,7 +84,6 @@ const featuresSchema = new Schema({
   fingerprint: String,         // "Cảm biến vân tay trong màn hình"
   sensors: [String],           // ["Gia tốc", "Tiệm cận", "Ánh sáng", "La bàn", "Áp kế", "Trọng lực"]
   special: [String],           // ["Hỗ trợ 5G", "Bảo mật vân tay", "Nhận diện khuôn mặt", "Kháng nước, kháng bụi"]
-
   wifi: String,                // "Wi-Fi 802.11 a/b/g/n/ac Dual-band (2.4 GHz/5 GHz)"
   bluetooth: String            // "v5.2"
 }, { _id: false });

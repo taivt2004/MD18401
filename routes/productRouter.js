@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controller/productController/product_controller');
-
+const checkToken = require('./token/checkToken');
 /**
  * @swagger
  * tags:
@@ -21,7 +21,7 @@ const productController = require('../controller/productController/product_contr
  *       500:
  *         description: Lỗi máy chủ
  */
-router.get('/all', productController.getAllProducts);
+router.get('/all', checkToken, productController.getAllProducts);
 
 /**
  * @swagger
